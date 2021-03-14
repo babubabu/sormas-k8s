@@ -1,5 +1,8 @@
+image:
+  tag: "2.17.0"
 sormas:
     dbHost: ""
+    dbMaxPoolsize: "128"
     dbName: "sormas_db"
     dbNameAudit: "sormas_audit"
     domainName: "sormas"
@@ -12,10 +15,12 @@ sormas:
     locale: "en"
     mailFrom: ""
     mailHost: ""
-    pgPassword: "sormas_user"
-    pgUsername: "changeme"
-    serverUrl: "sormas.exampale.com"
-    version: "1.35.0"
+    mapZoom: "10"
+    pgPassword: "changeme"
+    pgUsername: "sormas_user"
+    serverUrl: "sormas.example.com"
+    tz: "Europe/Berlin"
+    version: "1.56.1"
     separator: ","
 ingress:
     enabled: true
@@ -26,10 +31,10 @@ ingress:
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
       nginx.ingress.kubernetes.io/app-root: /sormas-ui
     hosts:
-      - host: sormas.exampale.com
+      - host: sormas.example.com
         paths:
           - /
     tls:
       - hosts:
-        - sormas.exampale.com
+        - sormas.example.com
         secretName: sormas-tls

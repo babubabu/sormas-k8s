@@ -12,9 +12,10 @@ persistence:
 image:
   repository: hzibraunschweig/sormas-application
   pullPolicy: IfNotPresent
-  tage: "1.35.0"
+  tag: "2.17.0"
 sormas:
   dbHost: ""
+  dbMaxPoolsize: "128"
   dbName: "sormas_db"
   dbNameAudit: "sormas_audit"
   domainName: "sormas"
@@ -27,10 +28,12 @@ sormas:
   locale: "en"
   mailFrom: ""
   mailHost: ""
+  mapZoom: "10"
   pgPassword: ""
   pgUsername: ""
   serverUrl: ""
-  version: "1.35.0"
+  tz: "Europe/Berlin"
+  version: "1.56.1"
   separator: ";"
   
 imagePullSecrets: []

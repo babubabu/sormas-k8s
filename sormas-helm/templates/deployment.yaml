@@ -51,13 +51,15 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:1.35.0"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: TZ
-              value: "Africa/Nairobi"
+            - name: CASEARCHIVEDAYS
+              value: "90"
             - name: DB_HOST
               value: {{ .Values.sormas.dbHost }}
+            - name: DB_JDBC_MAXPOOLSIZE
+              value: "{{ .Values.sormas.dbMaxPoolsize }}"
             - name: DB_NAME
               value: {{ .Values.sormas.dbName }}
             - name: DB_NAME_AUDIT
@@ -70,6 +72,14 @@ spec:
               value: {{ .Values.sormas.emailSenderName }}
             - name: EPIDPREFIX
               value: {{ .Values.sormas.epidPrefix }}
+            - name: EVENTARCHIVEDAYS
+              value: "90"
+            - name: GEO_TEMPLATE
+              value: "https://sg.geodatenzentrum.de/gdz_geokodierung_bund__${GEO_UUID}/geosearch.json?query=${street}+${houseNumber},${postalCode}+${city}&filter=typ:haus&count1"
+            - name: GEO_LONG_TEMPLATE
+              value: "$.features[0].geometry.coordinates[0]"
+            - name: GEO_LAT_TEMPLATE
+              value: "$.features[0].geometry.coordinates[1]"
             - name: JVM_MAX
               value: {{ .Values.sormas.jmx }}
             - name: LATITUDE
@@ -78,6 +88,8 @@ spec:
               value: "{{ .Values.sormas.longitute }}"
             - name: LOCALE
               value: {{ .Values.sormas.locale }}
+            - name: MAP_ZOOM
+              value: "{{ .Values.sormas.mapZoom }}"
             - name: MAIL_FROM
               value: {{ .Values.sormas.mailFrom }}
             - name: MAIL_HOST
@@ -96,6 +108,8 @@ spec:
               value: {{ .Values.sormas.version }}
             - name: SEPARATOR
               value: "{{ .Values.sormas.separator }}"
+            - name: TZ
+              value: {{ .Values.sormas.tz }}
           ports:
             - name: http
               containerPort: 6080
